@@ -11,6 +11,16 @@ defmodule FootballWeb.ResultController do
     render(conn, "index.json", results: results)
   end
 
+  # def index(conn, %{"" => }) do
+  #   results = Results.list_results()
+  #   render(conn, "index.json", results: results)
+  # end
+
+  # def index(conn, _params) do
+  #   results = Results.list_results()
+  #   render(conn, "index.json", results: results)
+  # end
+
   def show(conn, %{"id" => id}) do
     result = Results.get_result!(id)
     render(conn, "show.json", result: result)

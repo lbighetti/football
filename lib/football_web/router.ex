@@ -8,6 +8,6 @@ defmodule FootballWeb.Router do
   scope "/api", FootballWeb do
     pipe_through :api
 
-    resources "/results", ResultController, only: [:index, :show]
+    resources "/results", ResultController, only: [:index]
   end
 end
