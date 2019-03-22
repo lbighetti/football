@@ -21,84 +21,21 @@ defmodule Football.Results do
     Repo.all(Result)
   end
 
-  @doc """
-  Gets a single result.
-
-  Raises `Ecto.NoResultsError` if the Result does not exist.
-
-  ## Examples
-
-      iex> get_result!(123)
-      %Result{}
-
-      iex> get_result!(456)
-      ** (Ecto.NoResultsError)
-
-  """
-  def get_result!(id), do: Repo.get!(Result, id)
-
-  @doc """
-  Creates a result.
-
-  ## Examples
-
-      iex> create_result(%{field: value})
-      {:ok, %Result{}}
-
-      iex> create_result(%{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def create_result(attrs \\ %{}) do
-    %Result{}
-    |> Result.changeset(attrs)
-    |> Repo.insert()
+  def list_results_by_season(season) do
+    query = from r in Result,
+          where: r.season == ^season
+    Repo.all(query)
   end
 
-  @doc """
-  Updates a result.
-
-  ## Examples
-
-      iex> update_result(result, %{field: new_value})
-      {:ok, %Result{}}
-
-      iex> update_result(result, %{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def update_result(%Result{} = result, attrs) do
-    result
-    |> Result.changeset(attrs)
-    |> Repo.update()
+  def list_results_by_league(league) do
+    query = from r in Result,
+          where: r.div == ^league
+    Repo.all(query)
   end
 
-  @doc """
-  Deletes a Result.
-
-  ## Examples
-
-      iex> delete_result(result)
-      {:ok, %Result{}}
-
-      iex> delete_result(result)
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def delete_result(%Result{} = result) do
-    Repo.delete(result)
-  end
-
-  @doc """
-  Returns an `%Ecto.Changeset{}` for tracking result changes.
-
-  ## Examples
-
-      iex> change_result(result)
-      %Ecto.Changeset{source: %Result{}}
-
-  """
-  def change_result(%Result{} = result) do
-    Result.changeset(result, %{})
+  def list_results_by_season_and_league(season, league) do
+    query = from r in Result,
+          where: r.season == ^season and r.div == ^league
+    Repo.all(query)
   end
 end
