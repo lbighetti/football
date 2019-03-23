@@ -9,5 +9,6 @@ defmodule FootballWeb.Router do
     pipe_through :api
 
     resources "/results", ResultController, only: [:index]
+    get "/p/results", ResultController, :protobuf_index
   end
 end

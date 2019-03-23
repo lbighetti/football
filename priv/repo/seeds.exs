@@ -19,7 +19,10 @@ File.stream!("Data.csv")
   Result.import_changeset(%{
     div: div,
     season: season,
-    date: Date.from_iso8601!("#{String.slice(date, 6..9)}-#{String.slice(date, 3..4)}-#{String.slice(date, 0..1)}"),
+    date:
+      Date.from_iso8601!(
+        "#{String.slice(date, 6..9)}-#{String.slice(date, 3..4)}-#{String.slice(date, 0..1)}"
+      ),
     home_team: home_team,
     away_team: away_team,
     ftag: ftag,

@@ -1,0 +1,24 @@
+message Response {
+    repeated Result data = 1;
+}
+
+message Result {
+    required string div = 1;
+    required string season = 2;
+    required string date = 3;
+    required string home_team = 4;
+    required string away_team = 5;
+    required int32 ftag = 6;
+    required int32 fthg = 7;
+    required string ftr = 8;
+    required int32 htag = 9;
+    required int32 hthg = 10;
+    required string htr = 11;
+}
+
+// message Date {
+//   int32 year = 1;
+//   int32 month = 2;
+//   int32 day = 3;
+// }
+

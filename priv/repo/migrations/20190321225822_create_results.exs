@@ -14,8 +14,6 @@ defmodule Football.Repo.Migrations.CreateResults do
       add :hthg, :integer
       add :htag, :integer
       add :htr, :string
-
-      timestamps()
     end
   end
 end

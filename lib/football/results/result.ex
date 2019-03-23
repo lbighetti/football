@@ -17,8 +17,6 @@ defmodule Football.Results.Result do
     field :htag, :integer
     field :hthg, :integer
     field :htr, :string
-
-    timestamps()
   end
 
   @doc false

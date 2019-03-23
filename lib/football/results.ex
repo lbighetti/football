@@ -22,20 +22,26 @@ defmodule Football.Results do
   end
 
   def list_results_by_season(season) do
-    query = from r in Result,
-          where: r.season == ^season
+    query =
+      from r in Result,
+        where: r.season == ^season
+
     Repo.all(query)
   end
 
   def list_results_by_league(league) do
-    query = from r in Result,
-          where: r.div == ^league
+    query =
+      from r in Result,
+        where: r.div == ^league
+
     Repo.all(query)
   end
 
   def list_results_by_season_and_league(season, league) do
-    query = from r in Result,
-          where: r.season == ^season and r.div == ^league
+    query =
+      from r in Result,
+        where: r.season == ^season and r.div == ^league
+
     Repo.all(query)
   end
 end
