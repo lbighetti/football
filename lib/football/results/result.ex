@@ -20,7 +20,7 @@ defmodule Football.Results.Result do
   end
 
   @doc false
-  def import_changeset(attrs) do
+  def changeset(attrs) do
     %Result{}
     |> cast(attrs, @fields)
     |> validate_required(@fields)

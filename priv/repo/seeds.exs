@@ -16,7 +16,7 @@ File.stream!("Data.csv")
 |> CSV.decode!()
 |> Stream.drop(1)
 |> Stream.map(fn [_id, div, season, date, home_team, away_team, ftag, fthg, ftr, htag, hthg, htr] ->
-  Result.import_changeset(%{
+  Result.changeset(%{
     div: div,
     season: season,
     date:
