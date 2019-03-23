@@ -5,8 +5,6 @@ defmodule FootballWeb.ResultController do
   alias Football.Results
   alias Football.Results.ProtobufMsgs
 
-  action_fallback FootballWeb.FallbackController
-
   def swagger_definitions do
     %{
       Result:
