@@ -8,7 +8,20 @@ defmodule FootballWeb.Router do
   scope "/api", FootballWeb do
     pipe_through :api
 
-    resources "/results", ResultController, only: [:index]
+    get "/results", ResultController, :index
     get "/p/results", ResultController, :protobuf_index
+  end
+
+  scope "/api/swagger" do
+    forward "/", PhoenixSwagger.Plug.SwaggerUI, otp_app: :football, swagger_file: "swagger.json"
+  end
+
+  def swagger_info do
+    %{
+      info: %{
+        version: "1.0.0",
+        title: "Football Results Api"
+      }
+    }
   end
 end
