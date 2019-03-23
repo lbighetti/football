@@ -7,7 +7,7 @@ defmodule FootballWeb.ResultController do
 
   action_fallback FootballWeb.FallbackController
 
-    def swagger_definitions do
+  def swagger_definitions do
     %{
       Result:
         swagger_schema do
@@ -44,7 +44,6 @@ defmodule FootballWeb.ResultController do
             htr: "D"
           })
         end,
-
       Response:
         swagger_schema do
           title("Response")
@@ -60,8 +59,16 @@ defmodule FootballWeb.ResultController do
     description("List all results in the database")
     produces("application/x-protobuf")
     deprecated(false)
-    parameter(:season, :query, :string, "The season the match occured in", required: false, example: "201617")
-    parameter(:league, :query, :string, "The league where the team plays", required: false, example: "SP1")
+
+    parameter(:season, :query, :string, "The season the match occured in",
+      required: false,
+      example: "201617"
+    )
+
+    parameter(:league, :query, :string, "The league where the team plays",
+      required: false,
+      example: "SP1"
+    )
 
     response(200, "OK", Schema.ref(:Response),
       example: %{
@@ -161,15 +168,22 @@ defmodule FootballWeb.ResultController do
     end)
   end
 
-
   swagger_path(:index) do
     get("/api/results")
     summary("List Results in JSON format")
     description("List all results in the database")
     produces("application/json")
     deprecated(false)
-    parameter(:season, :query, :string, "The season the match occured in", required: false, example: "201617")
-    parameter(:league, :query, :string, "The league where the team plays", required: false, example: "SP1")
+
+    parameter(:season, :query, :string, "The season the match occured in",
+      required: false,
+      example: "201617"
+    )
+
+    parameter(:league, :query, :string, "The league where the team plays",
+      required: false,
+      example: "SP1"
+    )
 
     response(200, "OK", Schema.ref(:Response),
       example: %{

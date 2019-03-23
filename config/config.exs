@@ -32,7 +32,9 @@ import_config "#{Mix.env()}.exs"
 config :football, :phoenix_swagger,
   swagger_files: %{
     "priv/static/swagger.json" => [
-      router: FootballWeb.Router,     # phoenix routes will be converted to swagger paths
-      endpoint: FootballWeb.Endpoint  # (optional) endpoint config used to set host, port and https schemes.
+      # phoenix routes will be converted to swagger paths
+      router: FootballWeb.Router,
+      # (optional) endpoint config used to set host, port and https schemes.
+      endpoint: FootballWeb.Endpoint
     ]
   }
