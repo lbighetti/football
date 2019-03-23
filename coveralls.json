@@ -1,0 +1,6 @@
+{
+    "skip_files": [
+      "lib/football/application.ex",
+      "test/support/channel_case.ex"
+    ]
+  }
