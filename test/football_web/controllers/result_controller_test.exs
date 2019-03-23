@@ -57,5 +57,38 @@ defmodule FootballWeb.ResultControllerTest do
       response = proto_response(conn, 200, Football.Results.ProtobufMsgs.Response)
       assert length(response.data) == @total_test_entries
     end
+
+    test "lists results filter by league", %{conn: conn} do
+      conn = get(conn, Routes.result_path(conn, :protobuf_index), league: @sp1_league)
+      response = proto_response(conn, 200, Football.Results.ProtobufMsgs.Response)
+      results = response.data
+      assert length(results) == @sp1_entries
+      [first_result | _other_results] = results
+      assert first_result.div == "SP1"
+    end
+
+    test "lists results filter by season", %{conn: conn} do
+      conn = get(conn, Routes.result_path(conn, :protobuf_index), season: @season_2016_2017)
+      response = proto_response(conn, 200, Football.Results.ProtobufMsgs.Response)
+      results = response.data
+      [first_result | _other_results] = results
+      assert first_result.season == "201617"
+      assert length(results) == @season_2016_2017_entries
+    end
+
+    test "lists results filter by season and league", %{conn: conn} do
+      conn =
+        get(conn, Routes.result_path(conn, :protobuf_index),
+          season: @season_2016_2017,
+          league: @sp1_league
+        )
+
+      response = proto_response(conn, 200, Football.Results.ProtobufMsgs.Response)
+      results = response.data
+      [first_result | _other_results] = results
+      assert first_result.season == "201617"
+      assert first_result.div == "SP1"
+      assert length(results) == @sp1_season_2016_2017_entries
+    end
   end
 end
