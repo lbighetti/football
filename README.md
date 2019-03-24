@@ -6,7 +6,7 @@ This is my solution for Derivco technical evalutation. The original exercise is 
 
 The Football app is an read-only API that displays results for football matches, which can also be filtered by league and/or season.
 
-Documentation for the API has been written using Swagger, and be accessed in the endpoint `/api/swagger` once the application is running. See below for more information.
+Documentation for the API has been written using Swagger, and be accessed in the endpoint `/api/swagger` once the application is running. See [Development](#development) for more information.
 
 The app has been written in Elixir using the Phoenix framework, exposing http endpoints. There are two variants: one for JSON and one for protocol buffers.
 
@@ -34,18 +34,18 @@ For elixir and erlang, you can use [asdf](https://github.com/asdf-vm/asdf), as c
 
 ## Development
 
-`mix deps.get` - Install dependencies
-`mix ecto.setup` - Create and migrate your dev database
-`docker build -t football_dev -f Dockerfile.development .` - Build the dev docker image
-`docker run -p 4000:4000 -it football_dev:latest` - Run the dev docker image
+`mix deps.get` - Install dependencies  
+`mix ecto.setup` - Create and migrate your dev database  
+`docker build -t football_dev -f Dockerfile.development .` - Build the dev docker image  
+`docker run -p 4000:4000 -it football_dev:latest` - Run the dev docker image  
 
-(__On the first time only__)
+(__On the first time only__)  
 `mix run priv/repo/seeds.exs` - Seed the dev database
 
 ### API documentation
 
-You can open Swagger API documentation at `http://localhost:4000/api/swagger`
-You can re-generate or update it by running `mix phx.swagger.generate`
+You can open Swagger API documentation at `http://localhost:4000/api/swagger`.  
+You can re-generate or update it by running `mix phx.swagger.generate`.  
 
 ### Tests
 
