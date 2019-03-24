@@ -48,7 +48,8 @@ defmodule Football.MixProject do
       {:proto_response, "~> 0.3.0"},
       {:phoenix_swagger, "~> 0.8"},
       {:ex_json_schema, "~> 0.5"},
-      {:ex_doc, "~> 0.19", only: :dev, runtime: false}
+      {:ex_doc, "~> 0.19", only: :dev, runtime: false},
+      {:distillery, "~> 2.0"}
     ]
   end
 
