@@ -62,12 +62,12 @@ You can re-generate or update it by running `mix phx.swagger.generate`.
 ## Production
 
 ### Setup
-docker swarm init
-docker swarm leave --force
+`docker swarm init`
+`docker swarm leave --force`
 
 ### Deploying
-docker build -t football_prod .
-docker stack deploy --compose-file=docker-compose.yml prod
+`docker build -t football_prod .`
+`docker stack deploy --compose-file=docker-compose.yml prod`
 
 ### Seeding
 (only do this once, the very first time, as it will populate the database)
@@ -88,4 +88,4 @@ Now run the seed command replacing the container id
 `docker exec -it 85c9c350a9d2 ./bin/football seed`
 
 ### Killing deployed containers
-docker stack rm prod
+`docker stack rm prod`
