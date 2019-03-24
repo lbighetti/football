@@ -10,6 +10,14 @@ use Mix.Config
 config :football,
   ecto_repos: [Football.Repo]
 
+# Configure your database
+config :football, Football.Repo,
+  username: {:system, "DATABASE_USERNAME", "postgres"},
+  password: {:system, "DATABASE_PASSWORD", "postgres"},
+  database: {:system, "DATABASE", "football_dev"},
+  hostname: {:system, "DATABASE_HOSTNAME", "localhost"},
+  pool_size: {:system, :integer, "DATABASE_POOL_SIZE", 10}
+
 # Configures the endpoint
 config :football, FootballWeb.Endpoint,
   url: [host: "localhost"],

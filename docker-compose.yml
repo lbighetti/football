@@ -1,0 +1,46 @@
+version: '3'
+services:
+  football:
+    image: football_prod
+    # Not used by docker stack deploy
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 4000
+    networks:
+      - web
+    environment:
+      # ENV used by dockercloud/haproxy to reach the port of the service.
+     - SERVICE_PORTS=4000
+    deploy:
+      replicas: 3
+      update_config:
+        parallelism: 3
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+        window: 120s
+  proxy:
+    image: dockercloud/haproxy
+    depends_on:
+      - football
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 80:80
+    networks:
+      - web
+    environment:
+      # - leastconn sends request to the service with the least active requests.
+      - BALANCE=leastconn
+    deploy:
+      placement:
+        # Tasks are only scheduled for the manager node
+        constraints: [node.role == manager]
+networks:
+  web:
+    # We must set overlay as the driver in order to connect multi docker daemons
+    # to communicate between each other using docker swarm
+    driver: overlay

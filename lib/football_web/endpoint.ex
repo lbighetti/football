@@ -41,4 +41,10 @@ defmodule FootballWeb.Endpoint do
     signing_salt: "pnBMefq8"
 
   plug FootballWeb.Router
+
+  def init(_type, config) do
+    {:ok, config} = Confex.Resolver.resolve(config)
+
+    {:ok, config}
+  end
 end

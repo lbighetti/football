@@ -24,7 +24,7 @@ defmodule Football.MixProject do
   def application do
     [
       mod: {Football.Application, []},
-      extra_applications: [:logger, :runtime_tools, :exprotobuf]
+      extra_applications: [:logger, :runtime_tools, :confex, :exprotobuf]
     ]
   end
 
@@ -41,6 +41,8 @@ defmodule Football.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
+      {:confex, "~> 3.4.0"},
+      {:distillery, "~> 2.0"},
       {:csv, "~> 2.3"},
       {:credo, "~> 1.0.0", only: [:dev, :test], runtime: false},
       {:excoveralls, "~> 0.10", only: :test},

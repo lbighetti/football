@@ -1,0 +1,17 @@
+FROM elixir:1.8.1
+
+RUN apt-get -qq update
+RUN apt-get -qq install build-essential
+
+RUN mix local.hex --force && \
+    mix local.rebar --force
+
+WORKDIR /app
+ENV MIX_ENV dev
+
+ADD . .
+RUN mix deps.get
+
+ENV DATABASE_HOSTNAME host.docker.internal
+
+CMD mix phx.server
