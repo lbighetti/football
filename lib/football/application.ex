@@ -6,6 +6,13 @@ defmodule Football.Application do
   def start(_type, _args) do
     Confex.resolve_env!(:football)
 
+    # AppSignal Ecto setup
+    :telemetry.attach(
+      "appsignal-ecto",
+      [:my_app, :repo, :query],
+      &Appsignal.Ecto.handle_event/4,
+      nil
+    )
     children = [
       Football.Repo,
       FootballWeb.Endpoint

@@ -1,6 +1,7 @@
 defmodule FootballWeb.Endpoint do
   @moduledoc false
   use Phoenix.Endpoint, otp_app: :football
+  use Appsignal.Phoenix
 
   socket "/socket", FootballWeb.UserSocket,
     websocket: true,

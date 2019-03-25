@@ -23,7 +23,8 @@ config :football, FootballWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "ndfSPXnx8XhcBoNvRxRvVD2XDLfudYylHmfN8UpIcew/Urlx01R/ZURZJknVr9Xt",
   render_errors: [view: FootballWeb.ErrorView, accepts: ~w(json)],
-  pubsub: [name: Football.PubSub, adapter: Phoenix.PubSub.PG2]
+  pubsub: [name: Football.PubSub, adapter: Phoenix.PubSub.PG2],
+  instrumenters: [Appsignal.Phoenix.Instrumenter]
 
 # Configures Elixir's Logger
 config :logger, :console,
@@ -46,3 +47,5 @@ config :football, :phoenix_swagger,
       endpoint: FootballWeb.Endpoint
     ]
   }
+
+import_config "appsignal.exs"
