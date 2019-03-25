@@ -1,6 +1,8 @@
 defmodule Football.Results do
   @moduledoc """
   The Results context.
+
+  This is the main entry point to the `Football` application logic and data.
   """
 
   import Ecto.Query, warn: false
@@ -21,6 +23,7 @@ defmodule Football.Results do
     Repo.all(Result)
   end
 
+  @spec list_results_by_season(Result.season) :: [Result.t] | []
   def list_results_by_season(season) do
     query =
       from r in Result,
@@ -29,6 +32,7 @@ defmodule Football.Results do
     Repo.all(query)
   end
 
+  @spec list_results_by_league(Result.league) :: [Result.t] | []
   def list_results_by_league(league) do
     query =
       from r in Result,
@@ -37,6 +41,7 @@ defmodule Football.Results do
     Repo.all(query)
   end
 
+  @spec list_results_by_season_and_league(Result.div, Result.league) :: [Result.t] | []
   def list_results_by_season_and_league(season, league) do
     query =
       from r in Result,

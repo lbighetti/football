@@ -17,7 +17,8 @@ defmodule Football.MixProject do
         "coveralls.detail": :test,
         "coveralls.post": :test,
         "coveralls.html": :test
-      ]
+      ],
+      dialyzer: [plt_add_deps: :transitive]
     ]
   end
 
@@ -50,7 +51,8 @@ defmodule Football.MixProject do
       {:proto_response, "~> 0.3.0"},
       {:phoenix_swagger, "~> 0.8"},
       {:ex_json_schema, "~> 0.5"},
-      {:ex_doc, "~> 0.19", only: :dev, runtime: false}
+      {:ex_doc, "~> 0.19", only: :dev, runtime: false},
+      {:dialyxir, "~> 1.0.0-rc.4", only: [:dev], runtime: false}
     ]
   end
 

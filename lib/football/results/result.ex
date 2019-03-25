@@ -24,6 +24,9 @@ defmodule Football.Results.Result do
     field :htr, :string
   end
 
+  @type div :: String.t
+  @type season :: String.t
+
   @typedoc """
   The Result struct.
 
@@ -42,8 +45,8 @@ defmodule Football.Results.Result do
   * `:htr`: Half time results.
   """
   @type t :: %__MODULE__{
-    div: String.t,
-    season: String.t,
+    div: div,
+    season: season,
     date: Date.t,
     home_team: String.t,
     away_team: String.t,
@@ -54,7 +57,6 @@ defmodule Football.Results.Result do
     hthg: non_neg_integer,
     htr: String.t
   }
-
 
   @doc false
   def changeset(attrs) do
