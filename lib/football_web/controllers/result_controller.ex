@@ -1,4 +1,5 @@
 defmodule FootballWeb.ResultController do
+  @moduledoc false
   use FootballWeb, :controller
   use PhoenixSwagger
 

@@ -36,13 +36,17 @@ You might have to adjust postgres to accept all connections, [check here for mor
 
 ## Development
 
-`mix deps.get` - Install dependencies  
-`mix ecto.setup` - Create and migrate your dev database  
-`docker build -t football_dev -f Dockerfile.development .` - Build the dev docker image  
-`docker run -p 4000:4000 -it football_dev:latest` - Run the dev docker image  
+### Setup the database
 
-(__On the first time only__)  
-`mix run priv/repo/seeds.exs` - Seed the dev database
+- Install dependencies `mix deps.get` 
+- Create and migrate your dev database `mix ecto.setup`
+  
+- Seed the dev database (__On the first time only__) `mix run priv/repo/seeds.exs`
+
+### Run on docker
+
+- Build the dev docker image `docker build -t football_dev -f Dockerfile.development .`
+- Run the dev docker image `docker run -p 4000:4000 -it football_dev:latest`
 
 ### API documentation
 
@@ -78,18 +82,19 @@ Be aware this takes a while to run for the first time. Runs after the first will
 ## Production
 
 ### Setup
-`docker swarm init`  
-`docker swarm leave --force`
+- Initialize swarm and join as a manager `docker swarm init`  
+
+If for some reason you want to undo the swarm setup you can do `docker swarm leave --force`
 
 ### Deploying
-`docker build -t football_prod .`  
-`docker stack deploy --compose-file=docker-compose.yml prod`
+- Build the production docker image `docker build -t football_prod .`
+- Run the docker solution `docker stack deploy --compose-file=docker-compose.yml prod`
 
 ### Seeding
 (only do this once, the very first time, as it will populate the database)
 
 Find the docker id of one of the *football_prod* running containers 
-`docker ps`
+- `docker ps`
 
 
 ```bash
@@ -101,7 +106,7 @@ c7f958a24a13        football_prod:latest
 ```
 
 Now run the seed command replacing the container id  
-`docker exec -it 85c9c350a9d2 ./bin/football seed`
+- `docker exec -it 85c9c350a9d2 ./bin/football seed`
 
 ### Killing deployed containers
-`docker stack rm prod`
+- `docker stack rm prod`

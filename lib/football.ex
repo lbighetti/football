@@ -1,9 +1,7 @@
 defmodule Football do
   @moduledoc """
-  Football keeps the contexts that define your domain
-  and business logic.
+  This is the documentation for the Football application.
 
-  Contexts are also responsible for managing your data, regardless
-  if it comes from the database, an external API or others.
+  The main context and entry point to the logic and data is the `Football.Results` context.
   """
 end

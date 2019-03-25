@@ -1,6 +1,4 @@
 defmodule Football.Application do
-  # See https://hexdocs.pm/elixir/Application.html
-  # for more information on OTP Applications
   @moduledoc false
 
   use Application
@@ -8,18 +6,11 @@ defmodule Football.Application do
   def start(_type, _args) do
     Confex.resolve_env!(:football)
 
-    # List all child processes to be supervised
     children = [
-      # Start the Ecto repository
       Football.Repo,
-      # Start the endpoint when the application starts
       FootballWeb.Endpoint
-      # Starts a worker by calling: Football.Worker.start_link(arg)
-      # {Football.Worker, arg},
     ]
 
-    # See https://hexdocs.pm/elixir/Supervisor.html
-    # for other strategies and supported options
     opts = [strategy: :one_for_one, name: Football.Supervisor]
     Supervisor.start_link(children, opts)
   end

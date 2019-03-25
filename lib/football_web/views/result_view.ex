@@ -1,4 +1,5 @@
 defmodule FootballWeb.ResultView do
+  @moduledoc false
   use FootballWeb, :view
   alias FootballWeb.ResultView
 

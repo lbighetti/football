@@ -1,4 +1,5 @@
 defmodule FootballWeb.Router do
+  @moduledoc false
   use FootballWeb, :router
 
   pipeline :api do

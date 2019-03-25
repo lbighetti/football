@@ -1,4 +1,5 @@
 defmodule FootballWeb.ErrorView do
+  @moduledoc false
   use FootballWeb, :view
 
   # If you want to customize a particular status code

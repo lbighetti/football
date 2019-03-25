@@ -1,4 +1,9 @@
 defmodule Football.ReleaseTasks do
+  @moduledoc """
+  Module with migration and seed operations to be used by the release.
+
+  Reference: [Distillery Guide](https://hexdocs.pm/distillery/guides/running_migrations.html)
+  """
   @start_apps [
     :crypto,
     :ssl,
@@ -9,6 +14,9 @@ defmodule Football.ReleaseTasks do
 
   @repos Application.get_env(:football, :ecto_repos, [])
 
+  @doc """
+  The function to be called to run migration when deploying.
+  """
   def migrate(_argv) do
     start_services()
 
@@ -17,6 +25,9 @@ defmodule Football.ReleaseTasks do
     stop_services()
   end
 
+  @doc """
+  The function to be called to seed the database.
+  """
   def seed(_argv) do
     start_services()
 
