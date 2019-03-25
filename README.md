@@ -62,11 +62,11 @@ You can re-generate or update it by running `mix phx.swagger.generate`.
 ## Production
 
 ### Setup
-`docker swarm init`
+`docker swarm init`  
 `docker swarm leave --force`
 
 ### Deploying
-`docker build -t football_prod .`
+`docker build -t football_prod .`  
 `docker stack deploy --compose-file=docker-compose.yml prod`
 
 ### Seeding
