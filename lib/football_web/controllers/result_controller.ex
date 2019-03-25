@@ -127,11 +127,10 @@ defmodule FootballWeb.ResultController do
   end
 
   def protobuf_index(conn, %{"season" => season, "league" => league}) do
-    results =
-      Results.list_results_by_season_and_league(season, league)
-      |> parse_to_protobuf_struct
+    results = Results.list_results_by_season_and_league(season, league)
+    parsed_results = parse_to_protobuf_struct(results)
 
-    protobuf_response = ProtobufMsgs.Response.new(data: results)
+    protobuf_response = ProtobufMsgs.Response.new(data: parsed_results)
     encoded = ProtobufMsgs.Response.encode(protobuf_response)
 
     conn
@@ -140,11 +139,10 @@ defmodule FootballWeb.ResultController do
   end
 
   def protobuf_index(conn, %{"season" => season}) do
-    results =
-      Results.list_results_by_season(season)
-      |> parse_to_protobuf_struct
+    results = Results.list_results_by_season(season)
+    parsed_results = parse_to_protobuf_struct(results)
 
-    protobuf_response = ProtobufMsgs.Response.new(data: results)
+    protobuf_response = ProtobufMsgs.Response.new(data: parsed_results)
     encoded = ProtobufMsgs.Response.encode(protobuf_response)
 
     conn
@@ -153,11 +151,10 @@ defmodule FootballWeb.ResultController do
   end
 
   def protobuf_index(conn, %{"league" => league}) do
-    results =
-      Results.list_results_by_league(league)
-      |> parse_to_protobuf_struct
+    results = Results.list_results_by_league(league)
+    parsed_results = parse_to_protobuf_struct(results)
 
-    protobuf_response = ProtobufMsgs.Response.new(data: results)
+    protobuf_response = ProtobufMsgs.Response.new(data: parsed_results)
     encoded = ProtobufMsgs.Response.encode(protobuf_response)
 
     conn
@@ -217,7 +214,8 @@ defmodule FootballWeb.ResultController do
   defp parse_to_protobuf_struct(results) do
     results
     |> Enum.map(fn r ->
-      Map.from_struct(r)
+      r
+      |>Map.from_struct()
       |> Map.put(:date, to_string(r.date))
       |> Map.delete(:__meta__)
       |> ProtobufMsgs.Result.new()
