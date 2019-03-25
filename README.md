@@ -32,6 +32,8 @@ You'll need to have installed:
 
 For elixir and erlang, you can use [asdf](https://github.com/asdf-vm/asdf), as configured per `.tool-versions` file.
 
+You might have to adjust postgres to accept all connections, [check here for mor info](https://stackoverflow.com/questions/3278379/how-to-configure-postgresql-to-accept-all-incoming-connections). This will be necessary if you get connection errors when trying to run the application.
+
 ## Development
 
 `mix deps.get` - Install dependencies  
@@ -46,6 +48,10 @@ For elixir and erlang, you can use [asdf](https://github.com/asdf-vm/asdf), as c
 
 You can open Swagger API documentation at `http://localhost:4000/api/swagger`.  
 You can re-generate or update it by running `mix phx.swagger.generate`.  
+
+### Code documentation
+
+`mix docs && open doc/index.html`
 
 ### Tests
 
