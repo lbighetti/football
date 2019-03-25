@@ -38,7 +38,6 @@ You might have to adjust postgres to accept all connections, [check here for mor
 
 - Install dependencies `mix deps.get` 
 - Create and migrate your dev database `mix ecto.setup`
-- Seed the dev database (__On the first time only__) `mix run priv/repo/seeds.exs`
 - Run the application `mix phx.server`
 
 ### API documentation
