@@ -32,7 +32,7 @@ defmodule Football.Results do
     Repo.all(query)
   end
 
-  @spec list_results_by_league(Result.league) :: [Result.t] | []
+  @spec list_results_by_league(Result.div) :: [Result.t] | []
   def list_results_by_league(league) do
     query =
       from r in Result,
@@ -41,7 +41,7 @@ defmodule Football.Results do
     Repo.all(query)
   end
 
-  @spec list_results_by_season_and_league(Result.div, Result.league) :: [Result.t] | []
+  @spec list_results_by_season_and_league(Result.season, Result.div) :: [Result.t] | []
   def list_results_by_season_and_league(season, league) do
     query =
       from r in Result,
