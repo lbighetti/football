@@ -10,7 +10,7 @@ Documentation for the API has been written using Swagger, and be accessed in the
 
 The app has been written in Elixir using the Phoenix framework, exposing http endpoints. There are two variants: one for JSON and one for protocol buffers.
 
-Docker has been setup with two variants. One simplified setup for development and one more complete production setup. The production setup has 4 containers as follows:
+Docker setup is made of 4 containers as follows:
 
 ```
 HAProxy
@@ -36,17 +36,10 @@ You might have to adjust postgres to accept all connections, [check here for mor
 
 ## Development
 
-### Setup the database
-
 - Install dependencies `mix deps.get` 
 - Create and migrate your dev database `mix ecto.setup`
-  
 - Seed the dev database (__On the first time only__) `mix run priv/repo/seeds.exs`
-
-### Run on docker
-
-- Build the dev docker image `docker build -t football_dev -f Dockerfile.development .`
-- Run the dev docker image `docker run -p 4000:4000 -it football_dev:latest`
+- Run the application `mix phx.server`
 
 ### API documentation
 
@@ -55,13 +48,13 @@ You might have to adjust postgres to accept all connections, [check here for mor
 
 ### Code documentation
 
-`mix docs && open doc/index.html` 
+- Generate code documentation with exdoc `mix docs && open doc/index.html` 
 
 ### Tests & Coverage
 
 - Run tests with `mix test`
-- Run coverage with [`mix coveralls`](https://hexdocs.pm/excoveralls/Mix.Tasks.Coveralls.html)
-  - To generate prettyfied coverage html and check coverage line-by-line you can run `mix coveralls.html && open cover/excoveralls.html`
+- Run coverage with `mix coveralls`
+  - Html version with line-by-line coverage `mix coveralls.html && open cover/excoveralls.html`
 
 ### Static Code Analysis
 
@@ -88,7 +81,7 @@ If for some reason you want to undo the swarm setup you can do `docker swarm lea
 
 ### Deploying
 - Build the production docker image `docker build -t football_prod .`
-- Run the docker solution `docker stack deploy --compose-file=docker-compose.yml prod`
+- Run the docker stack `docker stack deploy --compose-file=docker-compose.yml prod`
 
 ### Seeding
 (only do this once, the very first time, as it will populate the database)
