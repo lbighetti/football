@@ -9,6 +9,8 @@ defmodule FootballWeb.Router do
   scope "/api", FootballWeb do
     pipe_through :api
 
+    get "/results/available", ResultController, :available
+    get "/p/results/available", ResultController, :protobuf_available
     get "/results", ResultController, :index
     get "/p/results", ResultController, :protobuf_index
   end

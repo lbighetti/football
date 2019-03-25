@@ -3,6 +3,17 @@ defmodule FootballWeb.ResultView do
   use FootballWeb, :view
   alias FootballWeb.ResultView
 
+  def render("available_list.json", %{results: results}) do
+    %{data: render_many(results, ResultView, "available.json")}
+  end
+
+  def render("available.json", %{result: result}) do
+    %{
+      div: result.div,
+      season: result.season,
+    }
+  end
+
   def render("index.json", %{results: results}) do
     %{data: render_many(results, ResultView, "result.json")}
   end

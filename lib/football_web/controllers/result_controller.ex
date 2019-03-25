@@ -43,11 +43,32 @@ defmodule FootballWeb.ResultController do
             htr: "D"
           })
         end,
+      Available:
+        swagger_schema do
+          title("Available")
+          description("Leagues and seasons available")
+
+          properties do
+            div(:string, "The football league and/or division")
+            season(:string, "The season the match took place in")
+          end
+
+          example(%{
+            div: "SP1",
+            season: "201617"
+          })
+        end,
       Response:
         swagger_schema do
           title("Response")
           description("Response schema for multiple football matches results")
           property(:data, Schema.array(:Result), "The results from football matches")
+        end,
+      AvailableResponse:
+        swagger_schema do
+          title("AvailableResponse")
+          description("Response schema for leagues and seasons available")
+          property(:data, Schema.array(:Available), "Leagues and seasons available")
         end
     }
   end
@@ -157,6 +178,42 @@ defmodule FootballWeb.ResultController do
     |> send_resp(200, encoded)
   end
 
+  swagger_path(:protobuf_available) do
+    get("/api/p/results/available")
+    summary("List leagues and seasons available in protocol buffers")
+    description("List all leagues and seasons available in the data")
+    produces("application/x-protobuf")
+    deprecated(false)
+
+    response(200, "OK", Schema.ref(:AvailableResponse),
+      example: %{
+        data: [
+          %{
+            div: "SP1",
+            season: "201617"
+          },
+          %{
+            div: "SP2",
+            season: "201617"
+          }
+        ]
+      }
+    )
+  end
+
+  def protobuf_available(conn, _params) do
+    available_list =
+      Results.list_available()
+      |> Enum.map(fn a -> ProtobufMsgs.Available.new(a) end)
+
+    protobuf_response = ProtobufMsgs.AvailableResponse.new(data: available_list)
+    encoded = ProtobufMsgs.Response.encode(protobuf_response)
+
+    conn
+    |> put_resp_content_type("application/x-protobuf")
+    |> send_resp(200, encoded)
+  end
+
   defp parse_to_protobuf_struct(results) do
     results
     |> Enum.map(fn r ->
@@ -238,5 +295,32 @@ defmodule FootballWeb.ResultController do
   def index(conn, _params) do
     results = Results.list_results()
     render(conn, "index.json", results: results)
+  end
+
+  swagger_path(:available) do
+    get("/api/results/available")
+    summary("List leagues and seasons available in JSON format")
+    description("List all leagues and seasons available in the data")
+    produces("application/json")
+    deprecated(false)
+
+    response(200, "OK", Schema.ref(:AvailableResponse),
+      example: %{
+        data: [
+          %{
+            div: "SP1",
+            season: "201617"
+          },
+          %{
+            div: "SP2",
+            season: "201617"
+          }
+        ]
+      }
+    )
+  end
+  def available(conn, _params) do
+    available_list = Results.list_available()
+    render(conn, "available_list.json", results: available_list)
   end
 end

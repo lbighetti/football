@@ -14,6 +14,19 @@ defmodule FootballWeb.ResultControllerTest do
   end
 
   describe "json api" do
+    test "lists seasons and leagues available", %{conn: conn} do
+      conn = get(conn, Routes.result_path(conn, :available))
+      results = json_response(conn, 200)["data"]
+      assert results == [
+        %{"div" => "SP1", "season" => "201617"},
+        %{"div" => "SP1", "season" => "201516"},
+        %{"div" => "SP2", "season" => "201617"},
+        %{"div" => "SP2", "season" => "201516"},
+        %{"div" => "E0", "season" => "201617"},
+        %{"div" => "D1", "season" => "201617"}
+      ]
+    end
+
     test "lists all results", %{conn: conn} do
       conn = get(conn, Routes.result_path(conn, :index))
       results = json_response(conn, 200)["data"]
@@ -52,6 +65,19 @@ defmodule FootballWeb.ResultControllerTest do
   end
 
   describe "protobuf api" do
+    test "lists all avaiable season and league", %{conn: conn} do
+      conn = get(conn, Routes.result_path(conn, :protobuf_available))
+      response = proto_response(conn, 200, Football.Results.ProtobufMsgs.AvailableResponse)
+      assert response.data == [
+        %Football.Results.ProtobufMsgs.Available{div: "SP1", season: "201617"},
+        %Football.Results.ProtobufMsgs.Available{div: "SP1", season: "201516"},
+        %Football.Results.ProtobufMsgs.Available{div: "SP2", season: "201617"},
+        %Football.Results.ProtobufMsgs.Available{div: "SP2", season: "201516"},
+        %Football.Results.ProtobufMsgs.Available{div: "E0", season: "201617"},
+        %Football.Results.ProtobufMsgs.Available{div: "D1", season: "201617"}
+      ]
+    end
+
     test "lists all results", %{conn: conn} do
       conn = get(conn, Routes.result_path(conn, :protobuf_index))
       response = proto_response(conn, 200, Football.Results.ProtobufMsgs.Response)

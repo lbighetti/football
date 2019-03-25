@@ -8,6 +8,25 @@ defmodule Football.Results do
 
   alias Football.Results.Result
 
+
+  @doc """
+  Returns the list of available season and leagues.
+
+  ## Examples
+
+      iex> list_available()
+      [%{div: "SP1", season: "201617"}, ...]
+
+  """
+  @spec list_available() :: [%{div: Result.div, season: Result.season}] | []
+  def list_available do
+    results = Repo.all(Result)
+
+    results
+    |> Enum.map(fn result -> %{div: result.div, season: result.season} end)
+    |> Enum.uniq
+  end
+
   @doc """
   Returns the list of results.
 

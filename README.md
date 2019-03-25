@@ -52,6 +52,7 @@ You might have to adjust postgres to accept all connections, [check here for mor
 
 ### Tests & Coverage
 
+- (only once) Setup test database `MIX_ENV=test mix ecto.setup`
 - Run tests with `mix test`
 - Run coverage with `mix coveralls`
   - Html version with line-by-line coverage `mix coveralls.html && open cover/excoveralls.html`

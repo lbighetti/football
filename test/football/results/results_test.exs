@@ -7,6 +7,19 @@ defmodule Football.ResultsTest do
   @league "SP1"
 
   describe "results" do
+
+    test "available" do
+      results = Results.list_available()
+      assert results == [
+        %{div: "SP1", season: "201617"},
+        %{div: "SP1", season: "201516"},
+        %{div: "SP2", season: "201617"},
+        %{div: "SP2", season: "201516"},
+        %{div: "E0", season: "201617"},
+        %{div: "D1", season: "201617"}
+      ]
+    end
+
     test "list_results/0 returns all results" do
       results = Results.list_results()
       assert results != []

@@ -6,5 +6,5 @@ defmodule Football.Results.ProtobufMsgs do
 
   It's used as a intermediary format to be encoded by `Protobuf` package.
   """
-  use Protobuf, from: Path.expand("result.proto", __DIR__)
+  use Protobuf, from: Path.wildcard(Path.expand("*.proto", __DIR__))
 end

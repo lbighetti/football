@@ -1,0 +1,8 @@
+message AvailableResponse {
+    repeated Available data = 1;
+}
+
+message Available {
+    required string div = 1;
+    required string season = 2;
+}

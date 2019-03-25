@@ -15,4 +15,3 @@ message Result {
     required int32 hthg = 10;
     required string htr = 11;
 }
-
