@@ -106,11 +106,11 @@ Now run the seed command replacing the container id
 
 -----
 
-## Application monitoring
+## Code Instrumentation
 
 ### AppSignal
 
-AppSignal is being used for error catching and telemetry.
+AppSignal is being used for error catching and performance metrics.
 I need to invite people via email (just let me know which emails).
 
 It can be acessed at https://appsignal.com/littlealchemist-dot-io/sites/5c995d5b14ad665f684a628e/dashboard#
